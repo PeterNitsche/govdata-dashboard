@@ -18,11 +18,14 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build
+      - name: Build frontend
         run: yarn build
 
-      - name: Lint
+      - name: Lint code
         run: yarn lint
 
-      - name: Unit tests
+      - name: Run unit tests
         run: yarn test
+
+      - name: Run end-to-end tests
+        uses: cypress-io/github-action@v6

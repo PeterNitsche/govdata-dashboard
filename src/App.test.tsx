@@ -5,6 +5,8 @@ import App from "./App";
 describe("something truthy and falsy", () => {
   it("Renders a div", () => {
     render(<App />);
-    expect(screen.getByRole("button", { name: "Start" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Dashboard" })
+    ).toBeInTheDocument();
   });
 });

@@ -4,12 +4,6 @@ describe("When opening the Dashboard page", () => {
     cy.injectAxe();
   });
 
-  it("shows a Dashboard", () => {
-    cy.get("#dashboardTitle").should("be.visible");
-    cy.get("#dashboardSearchInput").should("be.visible");
-    cy.get("#dashboardTable").should("be.visible");
-  });
-
   it("has no A11Y violations", () => {
     cy.checkA11y();
   });

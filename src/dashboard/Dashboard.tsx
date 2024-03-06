@@ -1,18 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchMinistryDatasets } from "./Dashboard.queries";
 import { useState } from "react";
-import {
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Stack, TextField, Typography } from "@mui/material";
 import styles from "./Dashboard.module.css";
 import { useDebounce } from "../utils/useDebounce";
+import { DashboardTable } from "./DashboardTable";
 
 export function Dashboard() {
   const [filterQuery, setFilterQuery] = useState<string>("");
@@ -42,38 +34,7 @@ export function Dashboard() {
         onChange={onFilterInputChange}
         className={styles.searchInput}
       />
-      {status === "pending" && <p>Loading...</p>}
-      {status === "error" && <p>Error while loading the data!</p>}
-      {status === "success" && (
-        <Table
-          id="dashboardTable"
-          aria-label="Number of available datasets by ministry"
-        >
-          <TableHead>
-            <TableRow>
-              <TableCell align="right" width={1}>
-                Datasets
-              </TableCell>
-              <TableCell width={3}>Ministry</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data?.map((ministry) => (
-              <TableRow
-                key={ministry.department}
-                data-test-id="ministry-record"
-              >
-                <TableCell align="right" data-test-id="ministry-datasets">
-                  {ministry.datasets}
-                </TableCell>
-                <TableCell data-test-id="ministry-name">
-                  {ministry.department}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      )}
+      <DashboardTable loadingState={status} ministries={data} />
     </Stack>
   );
 }

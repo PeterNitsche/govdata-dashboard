@@ -1,13 +1,15 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 import { z } from "zod";
 
-const MinistryDatasetSchema = z.object({
+const MinistrySchema = z.object({
   department: z.string().min(1),
   description: z.string(),
   datasets: z.number(),
 });
 
-const MinistryDatasetsSchema = z.array(MinistryDatasetSchema);
+const MinistryListSchema = z.array(MinistrySchema);
+
+export type MinistryList = z.infer<typeof MinistryListSchema>;
 
 export async function fetchMinistryDatasets({
   queryKey,
@@ -20,5 +22,5 @@ export async function fetchMinistryDatasets({
   if (!response.ok) {
     throw new Error(`Network request returned with ${response.status}`);
   }
-  return MinistryDatasetsSchema.parse(await response.json());
+  return MinistryListSchema.parse(await response.json());
 }

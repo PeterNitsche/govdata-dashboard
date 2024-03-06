@@ -15,7 +15,7 @@ export async function fetchMinistryDatasets({
   const filterQuery =
     typeof queryKey[1] === "string" ? `&department_like=${queryKey[1]}` : "";
   const response = await fetch(
-    `http://localhost:3000/departments?_sort=-datasets${filterQuery}`
+    `http://localhost:3000/departments?_sort=-datasets${filterQuery}`,
   );
   if (!response.ok) {
     throw new Error(`Network request returned with ${response.status}`);

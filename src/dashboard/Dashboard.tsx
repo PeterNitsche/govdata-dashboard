@@ -31,7 +31,9 @@ export function Dashboard() {
 
   return (
     <Stack direction={"column"} alignItems={"center"} spacing={2}>
-      <Typography variant="h1">Dashboard</Typography>
+      <Typography variant="h1" id="dashboardTitle">
+        Dashboard
+      </Typography>
       <TextField
         id="dashboardSearchInput"
         label="Search"
@@ -43,7 +45,10 @@ export function Dashboard() {
       {status === "pending" && <p>Loading...</p>}
       {status === "error" && <p>Error while loading the data!</p>}
       {status === "success" && (
-        <Table aria-label="Number of available datasets by ministry">
+        <Table
+          id="dashboardTable"
+          aria-label="Number of available datasets by ministry"
+        >
           <TableHead>
             <TableRow>
               <TableCell align="right" width={1}>
@@ -54,9 +59,16 @@ export function Dashboard() {
           </TableHead>
           <TableBody>
             {data?.map((ministry) => (
-              <TableRow key={ministry.department}>
-                <TableCell align="right">{ministry.datasets}</TableCell>
-                <TableCell>{ministry.department}</TableCell>
+              <TableRow
+                key={ministry.department}
+                data-test-id="ministry-record"
+              >
+                <TableCell align="right" data-test-id="ministry-datasets">
+                  {ministry.datasets}
+                </TableCell>
+                <TableCell data-test-id="ministry-name">
+                  {ministry.department}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

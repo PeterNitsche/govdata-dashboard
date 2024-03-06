@@ -4,14 +4,23 @@ import { Dashboard } from "./dashboard/Dashboard";
 
 const queryClient = new QueryClient();
 
+import {
+  ThemeProvider,
+  createTheme,
+  responsiveFontSizes,
+} from "@mui/material/styles";
+
+const theme = responsiveFontSizes(createTheme());
+
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <main>
-        <h1>Dashboard</h1>
-        <Dashboard />
-      </main>
-    </QueryClientProvider>
+    <ThemeProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <main>
+          <Dashboard />
+        </main>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 

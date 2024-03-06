@@ -2,10 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchMinistryDatasets } from "./Dashboard.queries";
 import { useState } from "react";
 import {
-  List,
-  ListItem,
-  ListItemText,
   Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
   TextField,
   Typography,
 } from "@mui/material";
@@ -38,20 +40,27 @@ export function Dashboard() {
       />
       {status === "pending" && <p>Loading...</p>}
       {status === "error" && <p>Error while loading the data!</p>}
-      <List>
-        {status === "success" &&
-          data?.map((ministry) => (
-            <ListItem key={ministry.department}>
-              <Typography variant="h6" component={"p"}>
-                {ministry.datasets}
-              </Typography>
-              <ListItemText
-                primary={ministry.department}
-                secondary={ministry.description}
-              />
-            </ListItem>
-          ))}
-      </List>
+
+      {status === "success" && (
+        <Table aria-label="Available datasets by ministry">
+          <TableHead>
+            <TableRow>
+              <TableCell align="right" width={200}>
+                Datasets
+              </TableCell>
+              <TableCell>Ministry</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data?.map((ministry) => (
+              <TableRow key={ministry.department}>
+                <TableCell align="right">{ministry.datasets}</TableCell>
+                <TableCell>{ministry.department}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
     </Stack>
   );
 }

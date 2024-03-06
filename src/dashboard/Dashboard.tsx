@@ -12,12 +12,14 @@ import {
   Typography,
 } from "@mui/material";
 import styles from "./Dashboard.module.css";
+import { useDebounce } from "../utils/useDebounce";
 
 export function Dashboard() {
   const [filterQuery, setFilterQuery] = useState<string>("");
+  const debouncedFilterQuery = useDebounce(filterQuery, 300);
 
   const { data, status } = useQuery({
-    queryKey: ["ministryDatasets", filterQuery],
+    queryKey: ["ministryDatasets", debouncedFilterQuery],
     queryFn: fetchMinistryDatasets,
   });
 
@@ -40,15 +42,14 @@ export function Dashboard() {
       />
       {status === "pending" && <p>Loading...</p>}
       {status === "error" && <p>Error while loading the data!</p>}
-
       {status === "success" && (
-        <Table aria-label="Available datasets by ministry">
+        <Table aria-label="Number of available datasets by ministry">
           <TableHead>
             <TableRow>
-              <TableCell align="right" width={200}>
+              <TableCell align="right" width={1}>
                 Datasets
               </TableCell>
-              <TableCell>Ministry</TableCell>
+              <TableCell width={3}>Ministry</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

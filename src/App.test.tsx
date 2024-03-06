@@ -6,7 +6,7 @@ describe("something truthy and falsy", () => {
   it("Renders a div", () => {
     render(<App />);
     expect(
-      screen.getByRole("heading", { name: "Dashboard" })
+      screen.getByRole("heading", { name: "Dashboard" }),
     ).toBeInTheDocument();
   });
 });

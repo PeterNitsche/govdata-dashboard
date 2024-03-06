@@ -16,13 +16,19 @@ export function Dashboard() {
 
   return (
     <>
-      <input type="text" value={filterQuery} onChange={onFilterInputChange} />
+      <label htmlFor="dashboardSearchInput">Search</label>
+      <input
+        id="dashboardSearchInput"
+        type="text"
+        value={filterQuery}
+        onChange={onFilterInputChange}
+      />
       {status === "pending" && <p>Loading...</p>}
       {status === "error" && <p>Error while loading the data!</p>}
       <ul>
         {status === "success" &&
           data?.map((ministry) => (
-            <li key={ministry.id}>
+            <li key={ministry.department}>
               {ministry.department}: {ministry.datasets}
             </li>
           ))}

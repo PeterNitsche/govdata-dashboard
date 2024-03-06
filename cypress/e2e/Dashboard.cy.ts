@@ -5,7 +5,8 @@ describe("When opening the Dashboard page", () => {
   });
 
   it("shows a Dashboard", () => {
-    cy.contains("Start").should("be.visible");
+    cy.contains("Dashboard").should("be.visible");
+    cy.contains("Search").should("be.visible");
   });
 
   it("has no A11Y violations", () => {

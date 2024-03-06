@@ -9,7 +9,6 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <main>
         <h1>Dashboard</h1>
-        <button>Start</button>
         <Dashboard />
       </main>
     </QueryClientProvider>

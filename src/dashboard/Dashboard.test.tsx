@@ -3,17 +3,12 @@ import { render, screen } from "@testing-library/react";
 import { Dashboard } from "./Dashboard";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PropsWithChildren, FC } from "react";
-import { MinistryList } from "./Dashboard.queries";
+import { ministryDatasetsMocks } from "./Dashboard.queries";
 
 const queryClient = new QueryClient();
 const QueryWrapper: FC<PropsWithChildren> = ({ children }) => (
   <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 );
-
-const mockData: MinistryList = [
-  { department: "Bundesamt A", description: "", datasets: 2323 },
-  { department: "Bundesamt B", description: "", datasets: 855 },
-];
 
 describe("Dashboard", () => {
   const fetchMock = vi.fn();
@@ -21,7 +16,7 @@ describe("Dashboard", () => {
     vi.spyOn(global, "fetch").mockImplementation(fetchMock);
     fetchMock.mockResolvedValue({
       ok: true,
-      json: () => Promise.resolve(mockData),
+      json: () => Promise.resolve(ministryDatasetsMocks),
     } as Response);
   });
 
@@ -50,9 +45,11 @@ describe("Dashboard", () => {
     expect(headers[1]).toHaveTextContent("Ministry");
 
     const cells = screen.getAllByRole("cell");
-    expect(cells[0]).toHaveTextContent(mockData[0].datasets + "");
-    expect(cells[1]).toHaveTextContent(mockData[0].department);
-    expect(cells[2]).toHaveTextContent(mockData[1].datasets + "");
-    expect(cells[3]).toHaveTextContent(mockData[1].department + "");
+    expect(cells[0]).toHaveTextContent(ministryDatasetsMocks[0].datasets + "");
+    expect(cells[1]).toHaveTextContent(ministryDatasetsMocks[0].department);
+    expect(cells[2]).toHaveTextContent(ministryDatasetsMocks[1].datasets + "");
+    expect(cells[3]).toHaveTextContent(
+      ministryDatasetsMocks[1].department + "",
+    );
   });
 });

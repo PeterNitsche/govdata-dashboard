@@ -24,3 +24,8 @@ export async function fetchMinistryDatasets({
   }
   return MinistryListSchema.parse(await response.json());
 }
+
+export const ministryDatasetsMocks: MinistryList = [
+  { department: "Bundesamt A", description: "", datasets: 2323 },
+  { department: "Bundesamt B", description: "", datasets: 855 },
+];

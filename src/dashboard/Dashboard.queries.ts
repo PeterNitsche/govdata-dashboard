@@ -10,7 +10,9 @@ const MinistryDatasetSchema = z.object({
 const MinistryDatasetsSchema = z.array(MinistryDatasetSchema);
 
 export async function fetchMinistryDatasets() {
-  const response = await fetch("http://localhost:3000/departments/");
+  const response = await fetch(
+    "http://localhost:3000/departments?_sort=-datasets"
+  );
   if (!response.ok) {
     throw new Error(`Network request returned with ${response.status}`);
   }

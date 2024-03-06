@@ -14,7 +14,9 @@ export function Dashboard() {
       <ul>
         {status === "success" &&
           data?.map((ministry) => (
-            <li key={ministry.id}>{ministry.department}</li>
+            <li key={ministry.id}>
+              {ministry.department}: {ministry.datasets}
+            </li>
           ))}
       </ul>
     </>

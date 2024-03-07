@@ -8,6 +8,7 @@ import {
 import { FC } from "react";
 import { MinistryList } from "./Dashboard.queries";
 import { QueryStatus } from "@tanstack/react-query";
+import styles from "./DashboardTable.module.css";
 
 interface DashboardTableProps {
   ministries?: MinistryList;
@@ -18,7 +19,11 @@ export const DashboardTable: FC<DashboardTableProps> = ({
   loadingState,
 }) => {
   return (
-    <>
+    <div
+      aria-live="assertive"
+      aria-busy={loadingState === "pending"}
+      className={styles.wrapper}
+    >
       {loadingState === "pending" && <p>Loading...</p>}
       {loadingState === "error" && <p>Error while loading the data!</p>}
       {loadingState === "success" && (
@@ -51,6 +56,6 @@ export const DashboardTable: FC<DashboardTableProps> = ({
           </TableBody>
         </Table>
       )}
-    </>
+    </div>
   );
 };

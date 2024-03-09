@@ -4,7 +4,7 @@ This web application provides a dashboard showing how many data sets each federa
 
 ## How to start
 
-Run `yarn start` to start the application.
+Run `yarn install` and `yarn start` to start the application.
 
 The frontend can be opened at [http://localhost:5173/](http://localhost:5173/) in the browser.
 A json-server serves the mock data at `localhost:3000`.
